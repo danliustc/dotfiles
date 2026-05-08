@@ -16,7 +16,40 @@ Emacs is managed in a separate repository.
 
 ## Python
 
-Python is managed with [uv](https://docs.astral.sh/uv/). The old pyenv shell hooks are disabled in `dot_zprofile`, and `UV_MANAGED_PYTHON=1` is exported by default.
+Python is managed with [uv](https://docs.astral.sh/uv/).
+
+Local conventions:
+
+* uv is installed by Homebrew.
+* `dot_zprofile` disables the old pyenv shell hooks.
+* `dot_zprofile` exports `UV_MANAGED_PYTHON=1`, so uv prefers Python versions it manages.
+* `dot_config/uv/dot_python-version` sets the default uv Python version to `3.11`.
+
+Daily usage:
+
+```bash
+# Run a one-off command without creating project state.
+uv run python -V
+uv run --with requests python script.py
+
+# Create and use a virtualenv in a project.
+uv venv
+source .venv/bin/activate
+
+# Install requirements into the active/project environment.
+uv pip install -r requirements.txt
+uv pip install black ruff pytest
+
+# For pyproject.toml projects.
+uv sync
+uv run pytest
+
+# Manage Python versions.
+uv python install 3.11
+uv python pin 3.11
+```
+
+Avoid re-enabling pyenv shims in shell startup files unless there is a project-specific reason.
 
 Reference:
 * [Bastian's Dotfiles](https://github.com/venthur/dotfiles)
