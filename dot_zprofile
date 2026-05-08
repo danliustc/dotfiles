@@ -1,22 +1,20 @@
-export EDITOR=nvim
+export EDITOR=vim
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # export JAVA_HOME=$(/usr/libexec/java_home)
 
-export TVM_HOME="$HOME/Workspace/tvm"
+# export TVM_HOME="$HOME/Workspace/tvm"
 
 export PATH="/opt/homebrew/opt/llvm@13/bin:$PATH"
 
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+# pyenv disabled (migrated to uv on 2026-03-04)
+# export PYENV_ROOT="$HOME/.pyenv"
+# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
 
-eval "$(pyenv init -)"
-
-eval "$(pyenv virtualenv-init -)"
-
-# remove duplicat entries from $PATH
+# remove duplicate entries from $PATH
 # zsh uses $path array along with $PATH 
 typeset -U PATH path
 
@@ -26,7 +24,15 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # Adds `~/.local/bin` to $PATH
 export PATH="$HOME/.local/bin:$PATH"
 
-export PYTHONPATH=$TVM_HOME/python:${PYTHONPATH}
+if [ -n "$TVM_HOME" ]; then
+  export PYTHONPATH="$TVM_HOME/python:${PYTHONPATH}"
+fi
 
 # config for autojump, installed by homebrew
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+
+# Added by Obsidian
+export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
+
+# uv defaults
+export UV_MANAGED_PYTHON=1

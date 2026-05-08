@@ -10,4 +10,30 @@ source $ZSH/oh-my-zsh.sh
 
 # alias vim="nvim"
 # alias tvmc="python -m tvm.driver.tvmc"
-alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+# pyenv shim workaround removed (migrated to uv on 2026-03-04)
+# alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+
+
+# opencode
+export PATH=/Users/liwei/.opencode/bin:$PATH
+
+# for typora
+alias typora="/Applications/Typora.app/Contents/MacOS/Typora"
+
+# ~/.zshrc
+#
+# 手动开关，方便随时切换
+proxy_on() {
+  export https_proxy=http://127.0.0.1:6152;
+  export http_proxy=http://127.0.0.1:6152;
+  export all_proxy=socks5://127.0.0.1:6153;
+  echo "Proxy ON"
+}
+
+proxy_off() {
+  unset http_proxy https_proxy all_proxy
+  echo "Proxy OFF"
+}
+
+# 如果想默认开启，就加这行：
+proxy_on

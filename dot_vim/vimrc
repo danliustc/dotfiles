@@ -13,4 +13,4 @@ highlight Comment ctermfg=green
 set nocompatible
 filetype plugin on
 
-inoremap jk <ESC>
+inoremap fd <ESC>

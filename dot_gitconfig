@@ -5,8 +5,12 @@
   st = status
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [user]
-  name = Dan
-  email = stephen.lee.ustc@gmail.com
+	name = LI Wei
+	email = stephen.lee.ustc@gmail.com
+[includeIf "gitdir:/Users/liwei/Code/EZchain/"]
+    path = .gitconfig-ezchain
+[includeIf "gitdir:/Users/liwei/Code/weekly-report/"]
+    path = .gitconfig-work
 [init]
   defaultBranch = main
 [core]
@@ -24,3 +28,8 @@
 	ff = only
 [merge]
 	ff = only
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
